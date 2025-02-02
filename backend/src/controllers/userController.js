@@ -1,6 +1,7 @@
-const User = require('../../models/user');
+import mongoose from 'mongoose';
+import User from '../../models/user.js';
 
-exports.createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
@@ -10,7 +11,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.getUsers = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -19,9 +20,9 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-exports.getUserById = async (req, res) => {
+export const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(mongoose.Types.ObjectId.req.params.id);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -31,7 +32,7 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!user) {
@@ -43,7 +44,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {

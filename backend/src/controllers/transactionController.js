@@ -1,6 +1,6 @@
-const Transaction = require('../../models/transaction');
+import Transaction from '../../models/transaction.js';
 
-exports.createTransaction = async (req, res) => {
+export const createTransaction = async (req, res) => {
   try {
     const transaction = new Transaction(req.body);
     await transaction.save();
@@ -10,7 +10,7 @@ exports.createTransaction = async (req, res) => {
   }
 };
 
-exports.getTransactions = async (req, res) => {
+export const getTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.find();
     res.status(200).json(transactions);
@@ -19,7 +19,7 @@ exports.getTransactions = async (req, res) => {
   }
 };
 
-exports.getTransactionById = async (req, res) => {
+export const getTransactionById = async (req, res) => {
   try {
     const transaction = await Transaction.findById(req.params.id);
     if (!transaction) {
@@ -31,7 +31,7 @@ exports.getTransactionById = async (req, res) => {
   }
 };
 
-exports.updateTransaction = async (req, res) => {
+export const updateTransaction = async (req, res) => {
   try {
     const transaction = await Transaction.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!transaction) {
@@ -43,7 +43,7 @@ exports.updateTransaction = async (req, res) => {
   }
 };
 
-exports.deleteTransaction = async (req, res) => {
+export const deleteTransaction = async (req, res) => {
   try {
     const transaction = await Transaction.findByIdAndDelete(req.params.id);
     if (!transaction) {

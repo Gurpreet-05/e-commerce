@@ -1,16 +1,22 @@
-const Razorpay = require('razorpay');
-const crypto = require('crypto');
+import Razorpay from "razorpay";
+import crypto from "crypto";
+import dotenv from "dotenv";
 
+dotenv.config();
 const razorpayInstance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-exports.createOrder = async (req, res) => {
+// Debugging to check if env variables are loaded
+console.log("Razorpay Key ID:", process.env.RAZORPAY_KEY_ID);
+console.log("Razorpay Key Secret:", process.env.RAZORPAY_KEY_SECRET);
+
+export const createOrder = async (req, res) => {
   const options = {
-    amount: req.body.amount * 100, // amount in the smallest currency unit
+    amount: req.body.amount * 100, // Razorpay expects amount in paise (INR)
     currency: "INR",
-    receipt: crypto.randomBytes(10).toString('hex'),
+    receipt: crypto.randomBytes(10).toString("hex"),
   };
 
   try {

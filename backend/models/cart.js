@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const cartSchema = new mongoose.Schema({
   email: {
@@ -40,4 +40,4 @@ const cartSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 const cartModel = mongoose.model('Cart', cartSchema);
-module.exports = cartModel;
+export default cartModel;

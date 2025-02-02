@@ -1,6 +1,6 @@
-const Razorpay = require('razorpay');
-const crypto = require('crypto');
-const dotenv = require('dotenv');
+import Razorpay from 'razorpay';
+import crypto from 'crypto';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -9,7 +9,7 @@ const razorpayInstance = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-exports.createOrder = async (amount) => {
+export const createOrder = async (amount) => {
   const options = {
     amount: amount * 100, // amount in the smallest currency unit
     currency: "INR",
@@ -24,7 +24,7 @@ exports.createOrder = async (amount) => {
   }
 };
 
-exports.verifyPayment = (razorpayPaymentId, razorpayOrderId, razorpaySignature) => {
+export const verifyPayment = (razorpayPaymentId, razorpayOrderId, razorpaySignature) => {
   const body = razorpayOrderId + "|" + razorpayPaymentId;
   const expectedSignature = crypto
     .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)

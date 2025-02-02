@@ -1,6 +1,6 @@
-const Seller = require('../../models/seller');
+import Seller from '../../models/seller.js';
 
-exports.createSeller = async (req, res) => {
+export const createSeller = async (req, res) => {
   try {
     const seller = new Seller(req.body);
     await seller.save();
@@ -10,7 +10,7 @@ exports.createSeller = async (req, res) => {
   }
 };
 
-exports.getSellers = async (req, res) => {
+export const getSellers = async (req, res) => {
   try {
     const sellers = await Seller.find();
     res.status(200).json(sellers);
@@ -19,7 +19,7 @@ exports.getSellers = async (req, res) => {
   }
 };
 
-exports.getSellerById = async (req, res) => {
+export const getSellerById = async (req, res) => {
   try {
     const seller = await Seller.findById(req.params.id);
     if (!seller) {
@@ -31,7 +31,7 @@ exports.getSellerById = async (req, res) => {
   }
 };
 
-exports.updateSeller = async (req, res) => {
+export const updateSeller = async (req, res) => {
   try {
     const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!seller) {
@@ -43,7 +43,7 @@ exports.updateSeller = async (req, res) => {
   }
 };
 
-exports.deleteSeller = async (req, res) => {
+export const deleteSeller = async (req, res) => {
   try {
     const seller = await Seller.findByIdAndDelete(req.params.id);
     if (!seller) {

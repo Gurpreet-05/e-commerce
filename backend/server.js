@@ -1,7 +1,6 @@
-const express = require('express');
-const app = require('./src/app');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import app from './src/app.js';  // Use .js extension in ES modules
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
